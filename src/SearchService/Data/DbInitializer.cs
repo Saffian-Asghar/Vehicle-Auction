@@ -18,21 +18,21 @@ public class DbInitializer
             .Key(a => a.Color, KeyType.Text)
             .CreateAsync();
 
-        var count = await DB.CountAsync<Item>();
-        if (count == 0)
-        {
-            Console.WriteLine("No data - will attempt to seed");
-            var itemData = await File.ReadAllTextAsync("Data/auctions.json");
+        // var count = await DB.CountAsync<Item>();
+        // if (count == 0)
+        // {
+        //     Console.WriteLine("No data - will attempt to seed");
+        //     var itemData = await File.ReadAllTextAsync("Data/auctions.json");
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
+        //     var options = new JsonSerializerOptions
+        //     {
+        //         PropertyNameCaseInsensitive = true,
+        //     };
 
-            var items = JsonSerializer.Deserialize<List<Item>>(itemData, options);
+        //     var items = JsonSerializer.Deserialize<List<Item>>(itemData, options);
 
-            await DB.InsertAsync(items);
-        }
+        //     await DB.InsertAsync(items);
+        // }
     }
 
 }
