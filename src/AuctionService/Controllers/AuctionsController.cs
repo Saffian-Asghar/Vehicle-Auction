@@ -41,7 +41,7 @@ public class AuctionsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<AuctionDTO>> CreateAuction(CreateAuctionDTO auctionDTO)
+    public async Task<ActionResult<AuctionDTO>> CreateAuction(CreateAuctionDto auctionDTO)
     {
         var auction = _mapper.Map<Auction>(auctionDTO);
         auction.Seller = "test";
@@ -54,6 +54,28 @@ public class AuctionsController : ControllerBase
         return CreatedAtAction(nameof(GetAuctionById),
          new { auction.Id },
          _mapper.Map<AuctionDTO>(auction));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto auctionDTO)
+    {
+        var auction = await _context.Auctions.Include(x => x.Item).FirstOrDefaultAsync(x => x.Id == id);
+
+        if(auction == null) return NotFound();
+        // todo: add authorization check and add user
+
+        auction.Item.Make = auctionDTO.Make ?? auction.Item.Make;
+        auction.Item.Model = auctionDTO.Model ?? auction.Item.Model;
+        auction.Item.Color = auctionDTO.Color ?? auction.Item.Color;
+        auction.Item.Mileage = auctionDTO.Mileage ?? auction.Item.Mileage;
+        auction.Item.Year = auctionDTO.Year ?? auction.Item.Year;
+
+        var result = await _context.SaveChangesAsync() > 0;
+
+        if (!result) return BadRequest("Could not update changes to the database");
+
+        return Ok();
+
     }
 
 }

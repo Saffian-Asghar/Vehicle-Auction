@@ -2,7 +2,7 @@
 
 namespace AuctionService.DTOs;
 
-public class CreateAuctionDTO
+public class CreateAuctionDto
 {
     [Required]
     public string Make { get; set; }
