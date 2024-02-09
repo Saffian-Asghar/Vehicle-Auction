@@ -21,27 +21,27 @@ public class AuctionsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<AuctionDTO>>> GetAllAuctions()
+    public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions()
     {
         var auctions = await _context.Auctions
             .Include(x => x.Item)
             .OrderBy(x => x.Item.Make)
             .ToListAsync();
-        return _mapper.Map<List<AuctionDTO>>(auctions);
+        return _mapper.Map<List<AuctionDto>>(auctions);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<AuctionDTO>> GetAuctionById(Guid id)
+    public async Task<ActionResult<AuctionDto>> GetAuctionById(Guid id)
     {
         var auction = await _context.Auctions
         .Include(x => x.Item)
         .FirstOrDefaultAsync(x => x.Id == id);
 
-        return _mapper.Map<AuctionDTO>(auction);
+        return _mapper.Map<AuctionDto>(auction);
     }
 
     [HttpPost]
-    public async Task<ActionResult<AuctionDTO>> CreateAuction(CreateAuctionDto auctionDTO)
+    public async Task<ActionResult<AuctionDto>> CreateAuction(CreateAuctionDto auctionDTO)
     {
         var auction = _mapper.Map<Auction>(auctionDTO);
         auction.Seller = "test";
@@ -53,7 +53,7 @@ public class AuctionsController : ControllerBase
 
         return CreatedAtAction(nameof(GetAuctionById),
          new { auction.Id },
-         _mapper.Map<AuctionDTO>(auction));
+         _mapper.Map<AuctionDto>(auction));
     }
 
     [HttpPut("{id}")]
@@ -78,4 +78,21 @@ public class AuctionsController : ControllerBase
 
     }
 
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteAuction(Guid id)
+    {
+        var auction = await _context.Auctions.FindAsync(id);
+
+        if(auction == null) return NotFound();
+
+        // todo: add authorization check and add user
+
+        _context.Auctions.Remove(auction);
+
+        var result = await _context.SaveChangesAsync() > 0;
+
+        if (!result) return BadRequest("Could not delete auction from the database");
+
+        return Ok();
+    }
 }
