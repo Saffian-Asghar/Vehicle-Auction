@@ -16,8 +16,11 @@ public class AuctionCreatedConsumer : IConsumer<AuctionCreated>
     }
     public async Task Consume(ConsumeContext<AuctionCreated> context)
     {
-        Console.WriteLine("---> Consuming AuctionCreated event" + context.Message.Id);
+        Console.WriteLine("--SearchService--> Consuming AuctionCreated event: " + context.Message.Id);
         var item = _mapper.Map<Item>(context.Message);
+        
+        if(item.Model == "Foo")
+            throw new ArgumentException("Invalid car name");
         
         await item.SaveAsync();
     }

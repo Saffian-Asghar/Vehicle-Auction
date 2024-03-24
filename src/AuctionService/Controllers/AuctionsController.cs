@@ -80,6 +80,10 @@ public class AuctionsController : ControllerBase
         auction.Item.Mileage = auctionDTO.Mileage ?? auction.Item.Mileage;
         auction.Item.Year = auctionDTO.Year ?? auction.Item.Year;
 
+        var auctionUpdated = _mapper.Map<AuctionDto>(auction);
+
+        await _publishEndpoint.Publish(_mapper.Map<AuctionUpdated>(auctionUpdated));
+
         var result = await _context.SaveChangesAsync() > 0;
 
         if (!result) return BadRequest("Could not update changes to the database");
@@ -98,6 +102,8 @@ public class AuctionsController : ControllerBase
         // todo: add authorization check and add user
 
         _context.Auctions.Remove(auction);
+
+        await _publishEndpoint.Publish<AuctionDeleted>(new AuctionDeleted{Id = auction.Id.ToString()});
 
         var result = await _context.SaveChangesAsync() > 0;
 
