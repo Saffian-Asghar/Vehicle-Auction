@@ -44,7 +44,7 @@ export default function AuctionForm() {
                 rules={{ required: "Color is required" }}
             />
 
-            <div className="grid grid-col-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
                 <Input
                     label="Year"
                     name="year"
@@ -68,7 +68,7 @@ export default function AuctionForm() {
                 rules={{ required: "Image URL is required" }}
             />
 
-            <div className="grid grid-col-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
                 <Input
                     label="Reserve Price (enter 0 if no reserve price)"
                     name="reservePrice"
