@@ -32,7 +32,7 @@ public static class Config
             new Client
             {
                 ClientId = "nextApp",
-                ClientName = "Next App",
+                ClientName = "nextApp",
                 ClientSecrets = { new Secret("secret".Sha256()) },
                 AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
                 RequirePkce = false,
@@ -40,6 +40,7 @@ public static class Config
                 AllowOfflineAccess = true,
                 AllowedScopes = { "openid", "profile", "auctionApp" },
                 AccessTokenLifetime = 3600*24*3000,
+                AlwaysIncludeUserClaimsInIdToken = true,
             }
         };
 }
