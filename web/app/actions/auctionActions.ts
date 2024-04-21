@@ -29,3 +29,7 @@ export async function updateAuction(data: FieldValues, id: string) {
 export async function getDetailedView(id: string): Promise<Auction> {
   return await fetchWrapper.get(`auctions/${id}`);
 }
+
+export async function deleteAuction(id: string) {
+  return await fetchWrapper.del(`auctions/${id}`);
+}
