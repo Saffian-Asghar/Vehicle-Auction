@@ -13,7 +13,7 @@ public class AuctionCreatedConsumer : IConsumer<AuctionCreated>
             ID = context.Message.Id.ToString(),
             AuctionEnd = context.Message.AuctionEnd,
             Seller = context.Message.Seller,
-            ReserverPrice = context.Message.ReservePrice,
+            ReservePrice = context.Message.ReservePrice,
         };
 
         await auction.SaveAsync();
