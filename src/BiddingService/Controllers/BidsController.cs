@@ -81,18 +81,11 @@ public class BidsController : ControllerBase
     }
 
     [HttpGet("{auctionId}")]
-    public async Task<ActionResult<IEnumerable<BidDto>>> GetBids(string auctionId)
+    public async Task<ActionResult<List<BidDto>>> GetBidsForAuction(string auctionId)
     {
-        var auction = await DB.Find<Auction>().OneAsync(auctionId);
-
-        if (auction == null)
-        {
-            return NotFound();
-        }
-
         var bids = await DB.Find<Bid>()
-            .Match(b => b.AuctionId == auctionId)
-            .Sort(b => b.Descending(b => b.BidTime))
+            .Match(a => a.AuctionId == auctionId)
+            .Sort(b => b.Descending(a => a.BidTime))
             .ExecuteAsync();
 
         return bids.Select(_mapper.Map<BidDto>).ToList();
