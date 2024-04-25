@@ -12,14 +12,16 @@ COPY src/IdentityService/IdentityService.csproj src/IdentityService/IdentityServ
 COPY src/BiddingService/BiddingService.csproj src/BiddingService/BiddingService.csproj
 COPY src/NotificationService/NotificationService.csproj src/NotificationService/NotificationService.csproj
 
+
 RUN dotnet restore Vehicle-Auction.sln
 
-COPY src/IdentityService/ src/IdentityService/
-WORKDIR /app/src/IdentityService
+COPY src/NotificationService/ src/NotificationService/
+COPY src/Contracts/ src/Contracts/
+WORKDIR /app/src/NotificationService
 RUN dotnet publish -c Release -o /app/src/out
 
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/src/out .
-ENTRYPOINT ["dotnet", "IdentityService.dll"]
+ENTRYPOINT ["dotnet", "NotificationService.dll"]
