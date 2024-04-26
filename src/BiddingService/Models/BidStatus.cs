@@ -1,4 +1,4 @@
-﻿namespace BiddingService;
+﻿namespace BiddingService.Models;
 
 public enum BidStatus
 {

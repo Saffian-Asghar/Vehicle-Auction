@@ -1,10 +1,9 @@
-﻿
-
+﻿using BiddingService.Models;
 using Contracts;
 using MassTransit;
 using MongoDB.Entities;
 
-namespace BiddingService;
+namespace BiddingService.Services;
 
 public class CheckAuctionFinished : BackgroundService
 {
@@ -55,7 +54,7 @@ public class CheckAuctionFinished : BackgroundService
                 .Match(b => b.BidStatus == BidStatus.Accepted)
                 .Sort(b => b.Descending(b => b.Amount))
                 .ExecuteFirstAsync(stoppingToken);
-                
+
             await publishEndpoint.Publish(new AuctionFinished
             {
                 ItemSold = winningBid != null,

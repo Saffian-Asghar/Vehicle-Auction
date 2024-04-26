@@ -1,8 +1,9 @@
 ﻿using Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
+using NotificationService.Hubs;
 
-namespace NotificationService;
+namespace NotificationService.Consumers;
 
 public class AuctionCreatedConsumer : IConsumer<AuctionCreated>
 {

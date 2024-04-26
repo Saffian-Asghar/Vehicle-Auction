@@ -1,11 +1,10 @@
-﻿using AuctionService.Data;
-using AuctionService.DTOs;
+﻿using AuctionService.DTOs;
 using AuctionService.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace AuctionService;
+namespace AuctionService.Data;
 
 public class AuctionRepository : IAuctionRepository
 {

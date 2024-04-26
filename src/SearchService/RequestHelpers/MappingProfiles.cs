@@ -2,7 +2,7 @@
 using Contracts;
 using SearchService.Models;
 
-namespace SearchService;
+namespace SearchService.RequestHelpers;
 
 public class MappingProfiles : Profile
 {

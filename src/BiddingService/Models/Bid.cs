@@ -1,6 +1,6 @@
 ﻿using MongoDB.Entities;
 
-namespace BiddingService;
+namespace BiddingService.Models;
 
 public class Bid : Entity
 {

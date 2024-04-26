@@ -1,8 +1,9 @@
-﻿using Contracts;
+﻿using BiddingService.Models;
+using Contracts;
 using MassTransit;
 using MongoDB.Entities;
 
-namespace BiddingService;
+namespace BiddingService.Consumers;
 
 public class AuctionCreatedConsumer : IConsumer<AuctionCreated>
 {

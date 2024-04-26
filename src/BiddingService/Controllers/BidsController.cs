@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using BiddingService.DTOs;
+using BiddingService.Models;
+using BiddingService.Services;
 using Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Entities;
 
-namespace BiddingService;
+namespace BiddingService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
