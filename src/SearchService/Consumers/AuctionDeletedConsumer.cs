@@ -18,9 +18,9 @@ public class AuctionDeletedConsumer : IConsumer<AuctionDeleted>
     {
         Console.WriteLine("--SearchService--> Consuming AuctionDeleted event: " + context.Message.Id);
 
-        var result = DB.DeleteAsync<Item>(context.Message.Id);
+        var result = await DB.DeleteAsync<Item>(context.Message.Id);
 
-        if (!result.Result.IsAcknowledged)
+        if (!result.IsAcknowledged)
             throw new MessageException(typeof(AuctionDeleted), "Failed to delete item in SearchService");
 
     }

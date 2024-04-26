@@ -6,7 +6,6 @@ using Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AuctionService.Controllers;
 
