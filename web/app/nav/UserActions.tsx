@@ -49,11 +49,14 @@ export default function UserActions({user}: Props) {
           Sell my car
         </Link>
       </Dropdown.Item>
-      <Dropdown.Item icon={HiCog}>
-        <Link href='/session'>
-          Session (dev only)
-        </Link>
-      </Dropdown.Item>
+      {process.env.NODE_ENV === 'development' && (
+              <Dropdown.Item icon={HiCog}>
+              <Link href='/session'>
+                Session (dev only)
+              </Link>
+            </Dropdown.Item>
+      )}
+
       <Dropdown.Divider />
       <Dropdown.Item icon={AiOutlineLogout} onClick={() => signOut({callbackUrl: '/'})}>
         Sign out

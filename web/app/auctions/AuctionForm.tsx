@@ -126,7 +126,7 @@ export default function AuctionForm({ auction }: Props) {
             )}
 
             <div className="flex justify-between">
-                <Button outline color="gray">
+                <Button onClick={ () => router.push(`/`)} outline color="gray">
                     Cancel
                 </Button>
                 <Button
