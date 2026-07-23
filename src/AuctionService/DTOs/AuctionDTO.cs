@@ -3,6 +3,7 @@
 public class AuctionDto
 {
     public Guid Id { get; set; }
+    // Price at which the auction starts.
     public int ReservePrice { get; set; }
     public string Seller { get; set; }
     public string Winner { get; set; }
